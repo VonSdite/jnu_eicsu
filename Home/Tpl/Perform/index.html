@@ -1,0 +1,136 @@
+	<?php 
+		$sto=new SaeStorage();
+		$domain="upload";
+		$imgURL=$sto->getUrl($domain,"image/");
+		if(!IS_SAE)
+		{
+			$imgURL="/".$imgURL;
+		}
+	?>
+<include file="./Public/layout/meta.html" />
+	
+	<link href="__PUBLIC__/css/stdindex_footer.css" 	type="text/css" 	rel="stylesheet" />
+	<link href="__PUBLIC__/css/stdindex_title.css" 	type="text/css" 	rel="stylesheet" />
+	<link href="__PUBLIC__/css/perform.css"			type="text/css"		rel="stylesheet" />
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/perform.core.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/perform.ui.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/perform.show.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/perform.io.js"></script>
+    <script type="text/javascript">
+        var URL = "__URL__";
+        var APP = "__APP__";
+        var ROOT = "__ROOT__";
+		var PUBLIC="__PUBLIC__";
+		var imgURL="<?php echo $imgURL;?>";
+
+    </script>
+	<title>暨南大学电气信息学院团委学生会</title>
+	</head>
+	<body>
+	<include file="./Public/layout/header.html" />
+		<div id="perform_hdr">
+			
+			<div class="perform_hdr_title">
+
+				<div id="user_info_for_perf">
+					<h1>绩效考核系统</h1>
+					<p>用户名：<?php echo $name;?></p>
+					<p>所属部门：<?php echo $apartment;?></p>
+					<p>用户类型：<?php echo $type;?></p>
+					<p>职位：<?php echo $position;?></p>
+					<p><?php echo $stage;?><!-- 系统阶段：5月考核进行中 --></p>
+				</div>
+				<div>
+					<img src="<?php echo $imgURL;?>performance_system_logo_big.png" />
+				</div>
+			</div>
+			
+		</div>
+		<script>
+		
+		</script>
+		<div id="perform_body">
+			<div id="control_group">
+			<!--
+				<button type="button" class="perf_ctrl_button" id="ganshizipingbiao" name="ganshizipingbiao" title="干事自评表">
+					干事自评表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="ganshikaohefankuibiao" name="ganshizipingbiao" title="干事自评表">
+					干事考核反馈表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="genjinbumenchuqintongjibiao" name="ganshizipingbiao" title="干事自评表">
+					跟进部门出勤统计表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="diaoyanyijiancainabiao" name="ganshizipingbiao" title="干事自评表">
+					调研意见采纳表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="zhengtikaohejieguofankuibiao" name="ganshizipingbiao" title="干事自评表">
+					整体考核结果反馈表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="buzhangzipingbiao" name="ganshizipingbiao" title="干事自评表">
+					部长自评表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="ganshikaohebiao" name="ganshizipingbiao" title="干事自评表">
+					干事考核表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="buzhangfankuibiao" name="ganshizipingbiao" title="干事自评表">
+					部长反馈表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="buzhangkaohebiao" name="ganshizipingbiao" title="干事自评表">
+					部长考核表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="bumenkaohebiao" name="ganshizipingbiao" title="干事自评表">
+					部门考核表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="youxiubuzhangpingdingbiao" name="ganshizipingbiao" title="干事自评表">
+					优秀部长评定表
+				</button>
+				<button type="button" class="perf_ctrl_button" id="zhuxituanfankuibiao" name="ganshizipingbiao" title="干事自评表">
+					主席团反馈表
+				</button>
+				-->
+				<img id="zhibiao" src="<?php echo $imgURL;?>zhibiao2.png" />
+			</div>
+
+            <div id="detail_table">
+				<h2 id="table_name">加载中...</h2>
+				<!--选择过去的月份的话可以看到以前自己填了什么，但是不能修改-->
+				考核月份：
+				<select name="#" id="year">
+					<option>2011</option>
+					<option>2012</option>
+					<option>2013</option>
+				</select>
+				年
+				<select name="#" id="month">
+					<option>1</optipn>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+				</select>
+				月
+				<button type="button" id="OK_button">
+                    确定
+                </button>
+				<hr class="perf_hr" />
+                <div  id="show_more"></div>
+            </div>
+					
+		</div>
+		
+		<include file="./Public/layout/footer.html" />
+
+		<script>
+		try{
+			PerformInit();
+			$('.div_right_bottom').hide();
+		}catch(err){
+			console.log(err);
+		}
+		</script>
+	</body>
+</html>
+			
+			
+				

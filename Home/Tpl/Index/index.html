@@ -1,0 +1,319 @@
+	<?php 
+		$sto=new SaeStorage();
+		$domain="upload";
+		$imgURL=$sto->getUrl($domain,"image/");
+		$newsImgURL=$sto->getUrl("news","");
+		if(!IS_SAE)
+		{
+			$imgURL="/".$imgURL;
+			$newsImgURL="/".$newsImgURL;
+		}
+	?>
+<include file="./Public/layout/meta.html" />
+	
+	<link href="__PUBLIC__/css/stdindex_footer.css" type="text/css" rel="stylesheet" />
+	<link href="__PUBLIC__/css/stdindex_title.css" type="text/css" rel="stylesheet" />
+	<link href="__PUBLIC__/css/homev2.css" type="text/css" rel="stylesheet" />
+	
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/searchbutton.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/home_news.js"></script>
+	
+	
+	<title>暨南大学电气信息学院团委学生会</title>
+	<script type="text/javascript">
+		var imgURL="<?php echo $imgURL;?>";
+		var newsImgURL="<?php echo $newsImgURL;?>";
+        var URL = "__URL__";
+        var APP = "__APP__";
+        var ROOT = "__ROOT__";
+		var PUBLIC="__PUBLIC__";
+	</script>
+	</head>
+	<body>
+	
+	<include file="./Public/layout/header.html" />
+		<div id="real_body">
+			<div id="slide_news">
+                <div id="loading">
+                    <img src="<?php echo $imgURL;?>Preloader_5.gif" id="loadinggif" alt="加载中" width="128px" height="128px"/>
+                </div>
+			</div>
+			<?php
+				unset($str);
+				$perform_url=$imgURL."performance_system_logo.png";
+				$allocate_url=$imgURL."allocate_system_logo.png";
+				$secretariat_url=$imgURL."secretariat_logo.png";
+				$str=<<<str
+			<div id="main_stu_sys" class="main_right_top">
+				<div id="inner_border" >
+					
+					<div id="performance_system">
+						<div class="center_the_logo">
+							<a href="__APP__/Perform/index" class="sys_logo_img" id="logo_of_per_sys">
+								<img src="$perform_url" width="50px" height="50px" alt="绩效考核系统的徽标" />
+							</a>
+						</div>
+						<p class="sys_alt">
+							绩效考核系统
+						</p>
+					</div>
+					<div id="allocate_system">
+						<div class="center_the_logo">
+							<a href="__APP__/Allocate/index" class="sys_logo_img" id="logo_of_alloc_sys">
+								<img src="$allocate_url" width="50px" height="50px" alt="人员调配系统的徽标" />
+							</a>
+						</div>
+						<p class="sys_alt">
+							人员调配系统
+						</p>
+					</div>
+					
+					<div id="secretariat">
+						<div class="center_the_logo">
+							<a href="__APP__/Archive/index" class="sys_logo_img" id="logo_of_secr_sys">
+								<img src="$secretariat_url" width="50px" height="50px" alt="秘书处的徽标" />
+							</a>
+						</div>
+						<p class="sys_alt">
+							活动存档
+						</p>
+					</div>
+				</div>
+			</div>
+str;
+			if($login==1)
+			{
+				echo $str;
+			}
+			
+			if($login==1)
+			{
+				$is_logined="_login";//这个字符串用来动态改变某些div的id
+			}
+			
+			?>
+			<div id="hot_and_notice<?php echo $is_logined; ?>" class="main_right_top">
+				<div id="what_s_hot">
+					<h2>热点</h2>
+					
+					<!--这里是热点的几个链接，其中新版首页反馈是基本固定的，其余3个就从新闻、活动的数据库里面检索文章的
+					关键词，以访问量和更新日期最好最新的3篇生成链接，锚标签的class是"hot_a"是决定样式的,下面仅举例-->
+					<div id="hot_key_word<?php echo $is_logined; ?>">
+						<a href="#" class="hot_a">
+							新版首页反馈
+						</a>
+						<?php
+						unset($str);
+						for($i=0;$i<count($hot);$i++)
+						{
+							$link=__URL__."/show?id=".$hot[$i]['id'];
+							$keyword=$hot[$i]['keyword'];
+							$str.=<<<str
+								<a class="hot_a" href="$link">$keyword</a>
+str;
+						}
+						echo $str;
+						?>
+<!-- 						<a href="#" class="hot_a">
+							APP嘉年华
+						</a>
+						<a href="#" class="hot_a">
+							群雄争霸
+						</a>
+						<a href="#" class="hot_a">
+							留学那点事
+						</a> -->
+					</div>
+					
+					<!--这里是热点活动，从活动的数据库你选取最新的活动文章，生成链接，标签的样式依旧是“hot_a",下面仅举例-->
+			
+					<div id="hot_activity<?php echo $is_logined; ?>">
+<!-- 					<a href="#" class="hot_a">
+						KSC程序设计大赛完满落幕
+						</a> -->
+						<ul>
+						<?php 
+							unset($str);
+							
+							$src=$imgURL."hot_activity.png";
+							for($i=0;$i<count($activity);$i++){
+							$link=__URL__."/show?id=".$activity[$i]['id'];
+							$keyword=$activity[$i]['keyword'];
+							
+							$str.=<<<str
+								<li><a class="hot_a" href="$link">$keyword</a>
+								<img src="$src" width="36px" height="20px" alt="热点活动" />
+								</li>
+str;
+							}
+							echo $str;
+						?>
+						</ul>
+						
+					</div>
+					<!--这里是取学生工作的数据库中最新的文章-->
+						
+					<div id="hot_stuwork<?php echo $is_logined; ?>">
+<!-- 						<a href="#" class="hot_a">
+							学长交流会，师生趣味活动
+						</a> -->
+						<ul>
+						<?php 
+							unset($str);	
+							$src=$imgURL."hot_stuwork.png";							
+							for($i=0;$i<count($work);$i++){
+							$link=__URL__."/show?id=".$work[$i]['id'];
+							$keyword=$work[$i]['keyword'];
+							$str.=<<<str
+								<li><a class="hot_a" href="$link">$keyword</a>
+								<img src="$src" width="59px" height="20px" alt="热点学生工作" />
+								</li>
+str;
+							}
+							echo $str;
+						?>
+						
+						</ul>
+					</div>
+				</div>
+				
+				<!--公告栏，建议设专门的公告栏的数据库，因为前端并没有设计更改公告栏的部分，所以公告栏的内容只能
+				在后台直接更改数据库，字数限制如下，下面事例恰好占完整个公告栏的div-->
+				<!--在学生会为发出第一份公告时，采用默认公告：
+					新版首页已正式上线，请使用mozilla firefox或google chrome最新版浏览器以获得最好使用体验
+				-->
+				<div id="notice">
+					<h2>公告</h2>
+					<!-- 新版首页已正式上线，请使用mozilla firefox或google chrome最新版浏览器以获得最好使用体验. -->
+					<p><!-- <?php echo $announcement; ?> --></p>
+				</div>		
+			</div>
+			
+			<div id="division">
+				<hr />
+			</div>
+		
+		
+			<!--即将举办也是跟公告栏类似，标题，举办时间，举办地点，口号，举办单位是需要后台写的
+			下面的例子中，标题是“诺贝尔数学奖颁奖仪式”
+						举办时间是“2月9日星期八”，要包括几月几日星期几
+						地点是“学生活动中心15楼”
+						口号是“挡我者挂高数”
+						举办单位是“KSC联盟，秘书处”
+						-->
+			<div id="coming_soon">
+				<h1>
+					正在举办
+				</h1>
+				<div id="coming_soon_body">
+					<div id="coming_activity_info">
+						<p id="the_title_of_activity_come_soon">
+							2016电气信息学院篮球赛
+							<!-- 诺贝尔数学奖颁奖仪式 -->
+							<?php echo $activityExpected['act_name'];?>
+						</p>
+						<p id="when_the_activity_hold">
+							<!-- 2月29日星期八 -->
+							10月19日 星期三<br/><br/><br/>      
+							16：40开赛<br/><br/><br/>    
+							G组：  16信安  VS  13电信     3号场<br/><br/> <br/>   
+							H组：  16自动化  VS  16软工   5号场<br/><br/><br/>
+							<br/><br/><br/><br/>
+							10月20日 星期四<br/><br/><br/>
+							15：20开赛<br/><br/><br/>
+							E组：  16包装  VS  15物联     5号场<br/><br/><br/>
+							16：40开赛<br/><br/><br/>
+							D组：  15包装  VS  14包装     5号场<br/><br/><br/>
+							H组：  15信安  VS  16电信     6号场<br/><br/><br/>    
+							<?php echo $activityExpected['act_time'];?>
+						</p>
+						<p id="where_the_activity_hold">
+							<!-- 学生活动中心15楼 -->
+
+							<a href="http://mp.weixin.qq.com/s?__biz=MzA4NjY0ODEzNA==&mid=2650672368&idx=1&sn=1c623c7726c47ee8d7ac28499d880259&chksm=87cfd8d9b0b851cfba1e5cd8be345b2d3918c8d6d1b02345526e4e3a4958202e2ef89f6fd1f2&scene=4#wechat_redirect" target="blank">更多</a>
+							
+
+							<?php echo $activityExpected['act_address'];?>
+						</p>
+					</div>
+					<div id="coming_activity_main_post">
+						<!-- 旧样例
+						<img src="<?php echo $activityExpected['act_bigposter'];?>" width="520px" height="380px" alt="活动主海报"/>	 -->
+						<img src="__PUBLIC__/css/image/basketball match.jpg" width="520px" height="380px" alt="活动主海报"/>	
+					</div>
+					<!-- <div id="coming_activity_small_post">
+						<div id="small_post_img">
+							<img src="<?php echo $activityExpected['act_smallposter'];?>" width="160px" height="200px" alt="活动副海报"/>
+						</div>
+						<p id="activity_slogan">
+							挡我者挂高数
+							<?php echo $activityExpected['act_slogan'];?>
+						</p>
+						<p id="activity_sponsor">
+							 KSC联盟，秘书处 
+							<?php echo $activityExpected['act_apartment'];?>
+						</p>
+						
+					</div> -->
+						
+				</div>
+			</div>
+            
+			<div id="coming_soon">
+				<h1>
+					宣传视频
+				</h1>
+				<div id="coming_soon_body">
+					<div id="coming_activity_info">
+						<p id="the_title_of_activity_come_soon">
+							机器人基地宣传视频
+						</p>
+						<p id="when_the_activity_hold">
+                            <a href="http://v.qq.com/boke/page/a/0/0/a01515xpn80.html" style="text-decoration:none;">点此查看视频</a>
+						</p>
+					</div>
+					<div id="coming_activity_main_post">
+                        <img src="__PUBLIC__/css/image/robot.png" width="520px" height="380px" alt="活动主海报"/>		
+					</div>
+                </div>
+			</div>
+            <div id = "coming_soon">
+                
+                <div id="coming_soon_body">
+                   <div id="coming_activity_info">
+						<p id="the_title_of_activity_come_soon">
+							acm基地宣传视频
+						</p>
+						<p id="when_the_activity_hold">
+                            <a href="http://v.qq.com/page/t/z/k/t015123y4zk.html" style="text-decoration:none;">点此查看视频</a>
+						</p>
+					</div>
+					<div id="coming_activity_main_post">
+                        <img src="__PUBLIC__/css/image/acm.png" width="520px" height="380px" alt="活动主海报"/>
+					</div>
+                </div>
+			</div>
+            <div id = "coming_soon">    
+                 <div id="coming_soon_body">
+					<div id="coming_activity_info">
+						<p id="the_title_of_activity_come_soon">
+							数模基地宣传视频
+						</p>
+						<p id="when_the_activity_hold">
+                            <a href="http://v.qq.com/page/m/p/7/m01421oktp7.html" style="text-decoration:none;">点此查看视频</a>
+						</p>
+					</div>
+					<div id="coming_activity_main_post">
+                        <img src="__PUBLIC__/css/image/shuxuejianmo.png" width="520px" height="380px" alt="活动主海报"/>		
+					</div>
+                 </div>
+			 </div>
+			
+		</div>
+		
+	
+		<include file="./Public/layout/footer.html" />
+        
+	</body>
+</html>

@@ -1,0 +1,133 @@
+	<?php 
+		$sto=new SaeStorage();
+		$domain="upload";
+		$imgURL=$sto->getUrl($domain,"image/");
+		if(!IS_SAE)
+		{
+			$imgURL="/".$imgURL;
+		}
+	?>
+<include file="./Public/layout/meta.html" />
+	
+	<link href="__PUBLIC__/css/stdindex_footer.css" 	type="text/css" 	rel="stylesheet" />
+	<link href="__PUBLIC__/css/stdindex_title.css" 	type="text/css" 	rel="stylesheet" />
+	<link href="__PUBLIC__/css/usercenter.css"			type="text/css" 	rel="stylesheet" />
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/userCenter.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/jshash/md5-min.js"></script>
+	<script type="text/javascript">
+        var URL = "__URL__";
+        var APP = "__APP__";
+        var ROOT = "__ROOT__";
+		var PUBLIC = "__PUBLIC__";
+    </script>
+
+<!--
+	<script>
+	$(document).ready(function(){
+	var person_info=getjson();
+	alert(person_info.name+person_info.account+person_info.sex);
+function getjson()
+{
+	    var obj;
+	    $.ajax({
+		url:"__URL__/message",
+		data:{},
+		async:false,
+		dataType:"json",
+		success:function(result){obj=result;}
+		});
+		return obj;
+}
+	    
+	});
+	</script>
+-->
+	<title>个人中心-暨南大学电气信息学院团委学生会</title>
+	</head>
+<body>
+		<div id="hdr">
+			<div id="hdr_main">
+				<div id="hdr_top">
+					<!--表头徽标-->
+					<div id="logo">
+						<img src="<?php echo $imgURL;?>std_title_logo.png" width="54px" height="54px" alt="团委学生会的徽标"/>
+					</div>
+					<!--标题-->
+					<div id="title">
+						<p id="chs_title">
+							暨南大学电气信息学院团委学生会<span class="subtitle">|个人中心</span>
+						</p>
+						<p id="eng_title">
+							Youth League &#38; Student Union of Electrical &#38; Information College,JNU<span class="subtitle">|User Center</span>
+						</p>
+						<div id="help_nav">
+							<a class="head_help_nav" href="liaojie.html">了解团委学生会</a>
+							<a class="head_help_nav" href="caozuofangfa.html">操作方法</a>
+							<a class="head_help_nav" href="zhichi.html">支持</a>
+                            <a class="head_help_nav" href="http://jnueicsu.sinaapp.com/">返回主页</a>
+						</div>		
+					</div>
+					
+					<div id="search_and_info">
+						<div id="login_info">
+							<a class="user_info" id="login_info_user_name" href="#">{$name}</a>
+							<a class="user_info" id="login_info_user_id" href="#">{$account}</a>
+							<a class="user_info" id="login_info_log_out" href="<?php echo __APP__; ?>/Login/logout">注销</a>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div id="hdr_guide">
+				<div id="guide">		
+					<button type="button" class="user_center_buttom" id="main_user_info" 	name="main_user_info" 		title="个人资料">
+						个人资料
+					</button>
+					<button type="button" class="user_center_buttom" id="user_kong_ke_biao" name="user_kong_ke_biao" 	title="空课表">
+						空课表
+					</button>
+					<button type="button" class="user_center_buttom" id="user_address_book" name="user_address_book" 	title="通讯录">
+						通讯录
+					</button>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div id="personal_data">
+			
+		</div>
+		
+		<!--下面是个人资料-修改的样式-->
+		<div id="change_personal_data">
+		
+		</div>
+		
+		<!--下面是个人资料中修改密码的样式-->
+		<div id="change_password">
+
+		</div>
+		
+		<!--下面是空课表的样式-->
+		<div id="empty_schedule">
+			
+		</div>
+		
+		
+		<!--下面是空课表修改的样式-->
+		<div id="change_empty_schedule">
+			
+		</div>
+		
+		<!--下面是通讯录样式-->
+		<div id="contacts_books">
+
+		</div>
+		
+	<include file="./Public/layout/footer.html" />
+	</body>
+</html>
+			
+			
+			
